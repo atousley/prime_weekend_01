@@ -13,19 +13,21 @@ $(document).ready(function(){
 		});
 
 		totalSal = totalSal + parseInt(results.annualSal / 12);
-		$('#total').replaceWith('<span id="total">' + '$' + totalSal + '</span>');
 		// Math.round(parseFloat()) this;
 
-		empArray.push(results, totalSal);
+		empArray.push(results);
 
 		$('#empInfo').find('input[type=text]').val('');
-		$('#empInfo').focus('#empInfo.fullName');
+		$('#fullName').focus();
+
+		updateSalary(totalSal);
 		appendDom(results);
 	});
 
 	$('#container').on('click', '.deleteButton', function() {
 			var index = $(this).data().id;
 			var employee = empArray[index];
+			console.log(employee);
 
 			totalSal -= Math.round(employee.annualSal /12);
 			totalSal = parseFloat(totalSal);
@@ -35,7 +37,7 @@ $(document).ready(function(){
 	});
 
 	function updateSalary(salary) {
-		$('#total').text('$' + salary);
+		$('#total').replaceWith('<span id="total">' + '$' + totalSal + '</span>');
 	}
 	
 	function appendDom(answers){
